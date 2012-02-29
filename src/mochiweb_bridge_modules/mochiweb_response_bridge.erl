@@ -30,10 +30,9 @@ build_response({Req, DocRoot}, Res) ->
             % Send the mochiweb response...
             Req:respond({Code, Headers2, Body});
         {file, Path} ->
-            %% Calculate expire date far into future...
-            Seconds = calendar:datetime_to_gregorian_seconds(calendar:local_time()),
-            TenYears = 10 * 365 * 24 * 60 * 60,
-            Seconds1 = calendar:gregorian_seconds_to_datetime(Seconds + TenYears),
+            %% Set expire date into 10 minutes
+	    Seconds = calendar:datetime_to_gregorian_seconds(calendar:local_time()),
+            Seconds1 = calendar:gregorian_seconds_to_datetime(Seconds + 600), 
             ExpireDate = httpd_util:rfc1123_date(Seconds1),
 
             %% Create the response telling Mochiweb to serve the file...
