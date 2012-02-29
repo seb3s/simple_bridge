@@ -26,7 +26,10 @@ cookie(Name, Value) ->
     cookie(Name, Value, "/", 20).
 
 cookie(Name, Value, Path, MinutesToLive) -> 
-    Cookie = #cookie { name=Name, value=Value, path=Path, minutes_to_live=MinutesToLive },
+    cookie(Name, Value, Path, MinutesToLive, undefined).
+
+cookie(Name, Value, Path, MinutesToLive, Domain) -> 
+    Cookie = #cookie { name=Name, value=Value, path=Path, minutes_to_live=MinutesToLive, domain=Domain },
     Cookies = Res#response.cookies,
     Cookies1 = [X || X <- Cookies, X#cookie.name /= Name],
     Cookies2 = [Cookie|Cookies1],

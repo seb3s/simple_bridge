@@ -46,4 +46,5 @@ create_cookie_header(Cookie) ->
     Name = Cookie#cookie.name,
     Value = Cookie#cookie.value,
     Path = Cookie#cookie.path,
-    mochiweb_cookies:cookie(Name, Value, [{path, Path}, {max_age, SecondsToLive}]).
+    Domain = Cookie#cookie.domain,
+    mochiweb_cookies:cookie(Name, Value, [{path, Path}, {max_age, SecondsToLive}, {domain, Domain}]).
